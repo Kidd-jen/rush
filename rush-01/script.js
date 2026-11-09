@@ -1,11 +1,19 @@
 let secondesRestantes = 1500;
 let intervalId;
 let modeTravail = true;
+let pomodorosTermines = Number(localStorage.getItem('pomodoros')) || 0;
 
 function afficherChrono() {
 document.getElementById('chrono').textContent =
     Math.floor(secondesRestantes / 60).toString().padStart(2, '0') + ':' + (secondesRestantes % 60).toString().padStart(2, '0');
-    
+
+    if (modeTravail === true) {
+        document.getElementById('mode').textContent = 'Travail';
+        document.body.classList.remove('mode-pause');
+    } else {
+        document.getElementById('mode').textContent = 'Pause';
+        document.body.classList.add('mode-pause');
+    }
 }
 
 afficherChrono();
@@ -17,9 +25,13 @@ document.getElementById('start').addEventListener('click', function() {
         afficherChrono();
 
         if (secondesRestantes === 0) {
+            if (modeTravail === true) {
+                pomodorosTermines++;
+                localStorage.setItem('pomodoros', pomodorosTermines);
+            }
     modeTravail = !modeTravail;
-    clearInterval(intervalId);
-    intervalId = undefined;
+    
+    
 
     if (modeTravail === true) {
         secondesRestantes = 1500;
