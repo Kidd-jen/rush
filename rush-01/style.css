@@ -1,0 +1,38 @@
+#chrono {
+    width: fit-content;
+    margin: 60px auto 0;
+    padding: 20px 40px;
+    font-family: "Courier New", monospace;
+    font-size: 64px;
+    font-weight: bold;
+    color: #1e293b;
+    background-color: #f1f5f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.controls button {
+    padding: 10px 22px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #3b82f6;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.controls button:hover {
+    background-color: #2563eb;
+}
+
+.controls button:active {
+    transform: scale(0.96);
+}
