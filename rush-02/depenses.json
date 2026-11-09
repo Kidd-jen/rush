@@ -1,0 +1,12 @@
+[
+  {
+    "montant": 12.5,
+    "categorie": "resto",
+    "description": "kebab"
+  },
+  {
+    "montant": 3.0,
+    "categorie": "transport",
+    "description": "bus"
+  }
+]
