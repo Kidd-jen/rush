@@ -7,6 +7,8 @@ function afficherChrono() {
 document.getElementById('chrono').textContent =
     Math.floor(secondesRestantes / 60).toString().padStart(2, '0') + ':' + (secondesRestantes % 60).toString().padStart(2, '0');
 
+    document.title = document.getElementById('chrono').textContent + ' - Mon Pomodoro';
+
     if (modeTravail === true) {
         document.getElementById('mode').textContent = 'Travail';
         document.body.classList.remove('mode-pause');
@@ -17,6 +19,7 @@ document.getElementById('chrono').textContent =
 }
 
 afficherChrono();
+document.getElementById('compteur').textContent = pomodorosTermines;
 
 document.getElementById('start').addEventListener('click', function() {
    if (intervalId === undefined) {
@@ -24,10 +27,11 @@ document.getElementById('start').addEventListener('click', function() {
         secondesRestantes--;
         afficherChrono();
 
-        if (secondesRestantes === 0) {
+        if (secondesRestantes <= 0) {
             if (modeTravail === true) {
                 pomodorosTermines++;
                 localStorage.setItem('pomodoros', pomodorosTermines);
+                document.getElementById('compteur').textContent = pomodorosTermines;
             }
     modeTravail = !modeTravail;
     
