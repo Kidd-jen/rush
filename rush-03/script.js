@@ -24,28 +24,38 @@ function afficherQuestion() {
     const titre = document.getElementById('titre');
     titre.textContent = q.question;
 
+    const conteneur = document.getElementById('reponses');
+    conteneur.innerHTML = '';
 
-const conteneur =  document.getElementById('reponses');
-conteneur.innerHTML = '';
+    const toutesLesReponses = [...q.incorrect_answers, q.correct_answer];
 
-const toutesLesReponses = [...q.incorrect_answers, q.correct_answer];
+    for (const rep of toutesLesReponses) {
+        const bouton = document.createElement('button');
+        bouton.textContent = rep;
+        conteneur.appendChild(bouton);
 
-for (const rep of toutesLesReponses) {
-    const bouton = document.createElement('button');
-    bouton.textContent = rep;
-    conteneur.appendChild(bouton);
+        bouton.addEventListener('click', () => {
+            if (rep === q.correct_answer) {
+                bouton.classList.add('correct');
+                score++;
+            } else {
+                bouton.classList.add('faux');
+            }
 
-    bouton.addEventListener('click', () => {
-        if (rep === q.correct_answer) {
-            console.log('Bonne réponse !');
-            score++;
-        } else {
-            console.log('Mauvaise réponse !');
-        }
-        indexCount++;
-        afficherQuestion();
-    });
-  }
+            for (const b of conteneur.querySelectorAll('button')) {
+                b.disabled = true;
+
+                if (b.textContent === q.correct_answer) {
+                    b.classList.add('correct');
+                }
+            }
+
+            setTimeout(() => {
+                indexCount++;
+                afficherQuestion();
+            }, 1000);
+        });
+    }
 }
 
 function afficherFin() {
@@ -54,6 +64,18 @@ function afficherFin() {
 
     const titre = document.getElementById('titre');
     titre.textContent = `Quiz terminé ! Votre score est ${score} sur ${questions.length}.`;
+}
+
+function melanger(tableau) {
+    for (let i = tableau.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * ___);
+
+        // échanger tableau[i] et tableau[j]
+        const temp = tableau[i];
+        tableau[i] = tableau[j];
+        tableau[j] = temp;
+    }
+    return tableau;
 }
 
 chargerQuestions();

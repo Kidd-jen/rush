@@ -114,6 +114,57 @@ h1 {
     outline-offset: 2px;
 }
 
+#reponses button:disabled {
+    cursor: default;
+}
+
+#reponses button:disabled:not(.correct):not(.faux) {
+    opacity: 0.55;
+    background: var(--carte);
+    border-color: var(--bordure);
+    transform: none;
+}
+
+/* ===== Bonne / mauvaise réponse ===== */
+#reponses button.correct,
+#reponses button.correct:hover {
+    background: #e3f6e8;
+    border-color: #2f9e55;
+    color: #1d6b38;
+    transform: none;
+}
+
+#reponses button.faux,
+#reponses button.faux:hover {
+    background: #fde8e8;
+    border-color: #d64545;
+    color: #9b2c2c;
+    transform: none;
+    animation: secousse 0.35s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+    #reponses button.correct,
+    #reponses button.correct:hover {
+        background: #183524;
+        border-color: #4cc274;
+        color: #9be3b2;
+    }
+
+    #reponses button.faux,
+    #reponses button.faux:hover {
+        background: #3a1c1f;
+        border-color: #ef6b6b;
+        color: #f5b0b0;
+    }
+}
+
+@keyframes secousse {
+    0%, 100% { translate: 0; }
+    25% { translate: -6px; }
+    75% { translate: 6px; }
+}
+
 /* ===== Mobile ===== */
 @media (max-width: 520px) {
     body {
