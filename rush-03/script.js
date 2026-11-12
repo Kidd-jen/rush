@@ -20,18 +20,19 @@ function afficherQuestion() {
     }
 
     const q = questions[indexCount];
-
+    const bonneReponse = decoder(q.correct_answer);
     const titre = document.getElementById('titre');
-    titre.textContent = q.question;
+    titre.textContent = decoder(q.question);
 
     const conteneur = document.getElementById('reponses');
     conteneur.innerHTML = '';
 
     const toutesLesReponses = [...q.incorrect_answers, q.correct_answer];
+    melanger(toutesLesReponses);
 
     for (const rep of toutesLesReponses) {
         const bouton = document.createElement('button');
-        bouton.textContent = rep;
+        bouton.textContent = decoder(rep);
         conteneur.appendChild(bouton);
 
         bouton.addEventListener('click', () => {
@@ -45,7 +46,7 @@ function afficherQuestion() {
             for (const b of conteneur.querySelectorAll('button')) {
                 b.disabled = true;
 
-                if (b.textContent === q.correct_answer) {
+                if (b.textContent === bonneReponse) {
                     b.classList.add('correct');
                 }
             }
@@ -64,11 +65,19 @@ function afficherFin() {
 
     const titre = document.getElementById('titre');
     titre.textContent = `Quiz terminé ! Votre score est ${score} sur ${questions.length}.`;
+
+   const boutonRejouer = document.createElement('button');
+    boutonRejouer.textContent = 'Rejouer';
+    conteneur.appendChild(boutonRejouer);
+
+    boutonRejouer.addEventListener('click', () => {
+        chargerQuestions();
+    });
 }
 
 function melanger(tableau) {
     for (let i = tableau.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * ___);
+        const j = Math.floor(Math.random() * (i + 1));
 
         // échanger tableau[i] et tableau[j]
         const temp = tableau[i];
@@ -78,5 +87,11 @@ function melanger(tableau) {
     return tableau;
 }
 
+function decoder(texte) {
+    const zone = document.createElement('textarea');
+    zone.innerHTML = texte;   // on y met le texte encodé
+    return zone.value;         // on récupère le texte décodé
+}
+    
 chargerQuestions();
 
