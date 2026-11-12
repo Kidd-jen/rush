@@ -1,0 +1,136 @@
+/* ===== Variables ===== */
+:root {
+    --bg: #f4f1ec;
+    --carte: #ffffff;
+    --texte: #1f1d2b;
+    --texte-doux: #6b6880;
+    --accent: #5b4bdb;
+    --accent-doux: #ece9fd;
+    --bordure: #e3dfd8;
+    --ombre: 0 10px 30px rgba(31, 29, 43, 0.08);
+    --rayon: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #14131c;
+        --carte: #1e1d29;
+        --texte: #f0eef7;
+        --texte-doux: #a29fb8;
+        --accent: #8b7fff;
+        --accent-doux: #2a2740;
+        --bordure: #2f2d3d;
+        --ombre: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+}
+
+/* ===== Base ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 48px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+    background: var(--bg);
+    color: var(--texte);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+}
+
+/* ===== Titre principal ===== */
+h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+}
+
+/* ===== Question ===== */
+#titre {
+    background: var(--carte);
+    border: 1px solid var(--bordure);
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
+    padding: 28px 24px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Etat de chargement (avant que la question arrive) */
+#titre:empty::before {
+    content: "Chargement des questions…";
+    color: var(--texte-doux);
+    font-weight: 400;
+}
+
+/* ===== Réponses ===== */
+#reponses {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+#reponses button {
+    background: var(--carte);
+    color: var(--texte);
+    border: 2px solid var(--bordure);
+    border-radius: var(--rayon);
+    padding: 16px 18px;
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+#reponses button:hover {
+    border-color: var(--accent);
+    background: var(--accent-doux);
+    transform: translateY(-2px);
+}
+
+#reponses button:active {
+    transform: translateY(0);
+}
+
+#reponses button:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 520px) {
+    body {
+        padding: 32px 16px;
+        justify-content: flex-start;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    #titre {
+        font-size: 1.1rem;
+        padding: 22px 18px;
+    }
+
+    #reponses {
+        grid-template-columns: 1fr;
+    }
+}
